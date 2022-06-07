@@ -54,7 +54,8 @@ private let builtInRecipes: [Recipe] = {
     var recipes = [
         "Apple Pie": Recipe(
             name: "Apple Pie", category: .dessert,
-            ingredients: applePie.ingredients),
+            ingredients: applePie.ingredients,
+            imageName: "applepie"),
         "Baklava": Recipe(
             name: "Baklava", category: .dessert,
             ingredients: []),
