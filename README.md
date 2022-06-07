@@ -1,6 +1,6 @@
 # Challenge: SwiftUI navigation hotdish
 
-
+<img src="images/result.png">
 
 Challenge details: https://developer.apple.com/news/?id=4a3k7k30
 
