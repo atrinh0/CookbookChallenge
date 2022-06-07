@@ -1,9 +1,9 @@
 /*
-See LICENSE folder for this sample’s licensing information.
+ See LICENSE folder for this sample’s licensing information.
 
-Abstract:
-The content view for the WWDC22 challenge.
-*/
+ Abstract:
+ The content view for the WWDC22 challenge.
+ */
 
 import SwiftUI
 
@@ -13,9 +13,33 @@ struct ChallengeContentView: View {
     var dataModel = DataModel.shared
 
     var body: some View {
-        VStack {
-            Text("Put your navigation experience here")
-            ExperienceButton(isActive: $showExperiencePicker)
+        NavigationSplitView(columnVisibility: $navigationModel.columnVisibility) {
+            List(selection: $navigationModel.selectedRecipe) {
+                ForEach(Category.allCases) { category in
+                    DisclosureGroup {
+                        ForEach(dataModel.recipes(in: category)) { recipe in
+                            NavigationLink(recipe.name, value: recipe)
+                        }
+                    } label: {
+                        Text(category.localizedName)
+                    }
+                }
+            }
+            .listStyle(.insetGrouped)
+            .navigationTitle("Cookbook")
+            .toolbar {
+                ExperienceButton(isActive: $showExperiencePicker)
+            }
+        } detail: {
+            RecipeDetail(recipe: navigationModel.selectedRecipe) { relatedRecipe in
+                Button {
+                    navigationModel.selectedCategory = relatedRecipe.category
+                    navigationModel.selectedRecipe = relatedRecipe
+                } label: {
+                    RecipeTile(recipe: relatedRecipe)
+                }
+                .buttonStyle(.plain)
+            }
         }
     }
 }
