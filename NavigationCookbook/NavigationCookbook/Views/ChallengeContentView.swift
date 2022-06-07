@@ -33,12 +33,10 @@ struct ChallengeContentView: View {
         } detail: {
             RecipeDetail(recipe: navigationModel.selectedRecipe) { relatedRecipe in
                 Button {
-                    navigationModel.selectedCategory = relatedRecipe.category
                     navigationModel.selectedRecipe = relatedRecipe
                 } label: {
-                    RecipeTile(recipe: relatedRecipe)
+                    Text(relatedRecipe.name)
                 }
-                .buttonStyle(.plain)
             }
         }
     }
